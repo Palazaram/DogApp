@@ -33,6 +33,16 @@ namespace DogApp.Controllers
             {
                 IEnumerable<DogDTO> dogs = await _IDog.GetDogsAsync();
 
+                if (!string.IsNullOrWhiteSpace(attribute) && string.IsNullOrWhiteSpace(order))
+                {
+                    return BadRequest("You have to set an order of sotring");
+                }
+                else if (string.IsNullOrWhiteSpace(attribute) && !string.IsNullOrWhiteSpace(order)) 
+                {
+                    return BadRequest("You have to set an attribute of sotring");
+                }
+
+
                 if (!string.IsNullOrWhiteSpace(attribute) && !string.IsNullOrWhiteSpace(order))
                 {
                     // If there are parameters, then sort

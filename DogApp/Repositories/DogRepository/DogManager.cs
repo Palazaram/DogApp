@@ -4,6 +4,7 @@ using DogApp.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace DogApp.Repositories.DogRepository
 {
@@ -55,10 +56,15 @@ namespace DogApp.Repositories.DogRepository
                 throw new ArgumentException("Both 'attribute' and 'order' parameters are required.");
             }
 
+            attribute = attribute.ToLower();
             order = order.ToLower();
-            
+
+            // Проверьте, что атрибут сортировки существует в модели DogDTO (без учета регистра)
+            PropertyInfo property = typeof(DogDTO).GetProperties()
+                .FirstOrDefault(p => p.Name.ToLower() == attribute);
+
             // Проверьте, что атрибут сортировки существует в модели Dog
-            if (typeof(DogDTO).GetProperty(attribute) == null)
+            if (property == null)
             {
                 throw new ArgumentException("Invalid sorting attribute.");
             }
@@ -72,11 +78,13 @@ namespace DogApp.Repositories.DogRepository
             // Выполните сортировку в зависимости от параметров запроса
             if (order == "asc")
             {
-                dogs = dogs.OrderBy(d => typeof(DogDTO).GetProperty(attribute).GetValue(d, null)).ToList();
+                //dogs = dogs.OrderBy(d => typeof(DogDTO).GetProperty(attribute).GetValue(d, null)).ToList();
+                dogs = dogs.OrderBy(d => property.GetValue(d, null)).ToList();
             }
             else
             {
-                dogs = dogs.OrderByDescending(d => typeof(DogDTO).GetProperty(attribute).GetValue(d, null)).ToList();
+                //dogs = dogs.OrderByDescending(d => typeof(DogDTO).GetProperty(attribute).GetValue(d, null)).ToList();
+                dogs = dogs.OrderByDescending(d => property.GetValue(d, null)).ToList();
             }
 
             return dogs;

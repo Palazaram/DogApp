@@ -66,7 +66,7 @@ namespace DogApp.Repositories.DogRepository
             // Checking that the sort attribute exists in the Dog model
             if (property == null)
             {
-                throw new ArgumentException("Invalid sorting attribute.");
+                throw new ArgumentException("Invalid sorting attribute. All attributes: Name, Color, TailLength, Weight.");
             }
 
             if (order != "asc" && order != "desc")

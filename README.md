@@ -1,15 +1,16 @@
 # DogApp
 
 # Project architecture
+
 ## Models
 
-Inside the 'Models' folder, there are two models: 'Dog' and 'DogDTO.'
+Inside the `Models` folder, there are two models: `Dog` and `DogDTO`.
 - The `Dog` model represents the core data structure for managing information about dogs.
-- The `DogDTO` model, located in the 'DTO' folder, serves as a Data Transfer Object for data exchange between the client and the server, ensuring a clear separation of data and presentation layers.
+- The `DogDTO` model, located in the `DTO` folder, serves as a Data Transfer Object for data exchange between the client and the server, ensuring a clear separation of data and presentation layers.
 
 ## Repositories
 
-**DogRepository**: Located in the 'Repositories' folder. It utilizes the principles of Dependency Injection for robust and flexible data management.
+**DogRepository**: Located in the `Repositories` folder. It utilizes the principles of Dependency Injection for robust and flexible data management.
 - In the `IDog` interface which contains methods for working with elemets (dogs), such as retrieving a list, adding, and editing.
 - In the `DogManager` service has been implemented, which implements the `IDog` interface and provides the business logic for managing notes. 
 

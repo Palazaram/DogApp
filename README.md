@@ -11,7 +11,7 @@ Inside the `Models` folder, there are two models: `Dog` and `DogDTO`.
 ## Repositories
 
 **DogRepository**: Located in the `Repositories` folder. It utilizes the principles of Dependency Injection for robust and flexible data management.
-- In the `IDog` interface which contains methods for working with elemets (dogs), such as retrieving a list, adding, and editing.
+- In the `IDog` interface which contains methods for working with elemets (dogs), such as retrieving a list and adding.
 - In the `DogManager` service has been implemented, which implements the `IDog` interface and provides the business logic for managing notes. 
 
 ## Data

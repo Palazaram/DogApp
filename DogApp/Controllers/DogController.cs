@@ -42,7 +42,6 @@ namespace DogApp.Controllers
                     return BadRequest("You have to set an attribute of sotring");
                 }
 
-
                 if (!string.IsNullOrWhiteSpace(attribute) && !string.IsNullOrWhiteSpace(order))
                 {
                     // If there are parameters, then sort

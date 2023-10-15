@@ -59,31 +59,27 @@ namespace DogApp.Repositories.DogRepository
             attribute = attribute.ToLower();
             order = order.ToLower();
 
-            // Проверьте, что атрибут сортировки существует в модели DogDTO (без учета регистра)
+            // Checking that the sort attribute exists in the DogDTO model (case insensitive)
             PropertyInfo property = typeof(DogDTO).GetProperties()
                 .FirstOrDefault(p => p.Name.ToLower() == attribute);
 
-            // Проверьте, что атрибут сортировки существует в модели Dog
+            // Checking that the sort attribute exists in the Dog model
             if (property == null)
             {
                 throw new ArgumentException("Invalid sorting attribute.");
             }
 
-            // Преобразуйте направление сортировки из строки в перечисление SortOrder
             if (order != "asc" && order != "desc")
             {
                 throw new ArgumentException("Invalid sorting order. Use 'asc' or 'desc'.");
             }
 
-            // Выполните сортировку в зависимости от параметров запроса
             if (order == "asc")
             {
-                //dogs = dogs.OrderBy(d => typeof(DogDTO).GetProperty(attribute).GetValue(d, null)).ToList();
                 dogs = dogs.OrderBy(d => property.GetValue(d, null)).ToList();
             }
             else
             {
-                //dogs = dogs.OrderByDescending(d => typeof(DogDTO).GetProperty(attribute).GetValue(d, null)).ToList();
                 dogs = dogs.OrderByDescending(d => property.GetValue(d, null)).ToList();
             }
 
@@ -92,7 +88,7 @@ namespace DogApp.Repositories.DogRepository
 
         public async Task<bool> IsDogNameUniqueAsync(string name)
         {
-            // Check if there is a dog with the same name in the database
+            // Checking if there is a dog with the same name in the database
             return await _db.Dogs.AnyAsync(d => d.Name == name);
         }
     }

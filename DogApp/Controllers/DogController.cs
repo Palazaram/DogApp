@@ -45,6 +45,11 @@ namespace DogApp.Controllers
                     var pagedDogs = dogs.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
                     return Ok(pagedDogs);
                 }
+                else if (!pageNumber.HasValue && pageSize.HasValue) 
+                {
+                    var pagedDogs = dogs.Take(pageSize.Value);
+                    return Ok(pagedDogs);
+                }
                 else
                 {
                     // If there are no pagination options, return all dogs
